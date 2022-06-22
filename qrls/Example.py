@@ -19,7 +19,7 @@ def _eqlabel(C):
 	return s
 		
 
-def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,
+def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,xy=None,
 			xrange=[-10.0,10.0],n=100,fig=None,maps=[1,1,0,0],
 			ShowNumpy=True,ShowLegend=True,ShowOriginal=True,Label=None):
 	'''
@@ -69,11 +69,16 @@ def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,
 	=======
 	ax : object
 		matplotlib.pyplot.Axes instance
+	out : dict
+		Dictionary containing fake data, fit coeffecients
 
 	'''
 	
 	#get the fake data
-	x,y = FakeData(beta=beta,noise=noise,xrange=xrange,n=n)
+	if not xy is None:
+		x,y = xy
+	else:
+		x,y = FakeData(beta=beta,noise=noise,xrange=xrange,n=n)
 	
 	#get the polynomial degree to fit if not supplied
 	if deg is None:
@@ -100,6 +105,14 @@ def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,
 	y0l = _eqlabel(beta)
 	yql = _eqlabel(betaqr)
 	ynl = _eqlabel(betanp)
+	
+	#create output
+	out = {}
+	out['x'] = x
+	out['y'] = y
+	out['beta'] = beta
+	out['betaqr'] = betaqr
+	out['betanp'] = betanp
 	
 		
 	if fig is None:
@@ -135,4 +148,4 @@ def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,
 	if ShowLegend:
 		ax.legend()
 	
-	return ax
+	return ax,out
