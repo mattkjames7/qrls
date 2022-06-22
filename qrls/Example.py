@@ -28,7 +28,7 @@ def _eqlabel(C):
 def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,xy=None,
 			xrange=[-10.0,10.0],n=100,fig=None,maps=[1,1,0,0],
 			ShowNumpy=True,ShowLegend=True,ShowOriginal=True,
-			ShowFit=True,Label=None):
+			ShowFit=True,Label=None,loc='best'):
 	'''
 	Generate some fake "data" by defining a polynomial with some 
 	additional noise.
@@ -156,6 +156,6 @@ def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,xy=None,
 	
 	#show the legend
 	if ShowLegend:
-		ax.legend(loc='center',fontsize='x-small')
+		ax.legend(loc=loc,fontsize='x-small')
 	
 	return ax,out
