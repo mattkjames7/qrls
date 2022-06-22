@@ -9,8 +9,8 @@ def FakeData(beta=[0.1,0.2,2.0,-10.0],noise=5.0,xrange=[-5.0,5.0],n=100):
 	Inputs
 	======
 	beta : list
-		List of polynomial betaicients, the length of which is equal to
-		the degree of the polynomial minus one. The betaicients are in
+		List of polynomial coefficients, the length of which is equal to
+		the degree of the polynomial minus one. The coefficients are in
 		the order from highest degree to lowest.
 		e.g. 
 		beta = [1,2,3,4,5] would give the following polynomial:
