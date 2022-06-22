@@ -1,5 +1,5 @@
 import numpy as np
-from .GramGchmidt import GramSchmidt
+from .GramSchmidt import GramSchmidt
 
 
 def QRLeastSq(x,y,deg):

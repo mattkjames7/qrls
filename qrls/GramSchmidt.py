@@ -23,20 +23,20 @@ def GramSchmidt(A):
 	
     #U and E have the same shape
 	U = np.zeros(A.shape,dtype='float64')
-	Q = np.zeros(A.shape,dtype='float64')
+	E = np.zeros(A.shape,dtype='float64')
 	
     #calculate the orthogonal vectors (and unit vectors) 
 	for i in range(0,n):
 		U[:,i] = A[:,i]
 		for j in range(0,i):
-			U[:,i] -=  np.sum(A[:,i]*Q[:,j])*Q[:,j]
-		Q[:,i] = U[:,i]/np.linalg.norm(U[:,i])
+			U[:,i] -=  np.sum(A[:,i]*E[:,j])*E[:,j]
+		E[:,i] = U[:,i]/np.linalg.norm(U[:,i])
 		
 	#E is actually Q!!
 	Q = E
 
 	#calculate R
-	R = n.dot(Q.T,A)
+	R = np.dot(Q.T,A)
 
 	#make it upper-triangular!
 	R = np.triu(R)

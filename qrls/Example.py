@@ -20,7 +20,7 @@ def _eqlabel(C):
 		
 
 def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,
-			xrange=[-5.0,5.0],n=100,fig=None,maps=[1,1,0,0],
+			xrange=[-10.0,10.0],n=100,fig=None,maps=[1,1,0,0],
 			ShowNumpy=True,ShowLegend=True,ShowOriginal=True,Label=None):
 	'''
 	Generate some fake "data" by defining a polynomial with some 
@@ -88,7 +88,7 @@ def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,
 	p1dnp = np.poly1d(betanp)
 	
 	#original
-	p1d0 = np.p1d(beta)
+	p1d0 = np.poly1d(beta)
 	
 	#get some lines to plot
 	xp = np.linspace(xrange[0],xrange[1],n)
@@ -97,9 +97,9 @@ def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,
 	ypnp = p1dnp(xp)
 	
 	#get the labels
-	y0l = _eqlabel(coeff)
-	yql = _eqlabel(beta)
-	ynl = _eqlabel(nfit)
+	y0l = _eqlabel(beta)
+	yql = _eqlabel(betaqr)
+	ynl = _eqlabel(betanp)
 	
 		
 	if fig is None:
@@ -118,14 +118,14 @@ def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,
 	
 	#plot original equation without noise
 	if ShowOriginal:
-		ax.scatter(xc,yp0,color='black',label=y0l+' (original)')
+		ax.plot(xp,yp0,color='black',label=y0l+' (original)')
 		
 	#plot QR fit
-	ax.plot(xc,ypqr,color='red',label=yql+' (QR)',linestyle='--',lw=2.0)
+	ax.plot(xp,ypqr,color='red',label=yql+' (QR)',linestyle='--',lw=2.0)
 	
 	#plot numpy fit
 	if ShowNumpy:
-		ax.plot(xc,ypnp,color='lime',label=ynl+' (numpy)',linestyle=':',lw=3.0)
+		ax.plot(xp,ypnp,color='lime',label=ynl+' (numpy)',linestyle=':',lw=3.0)
 	
 	#subplot label
 	if not Label is None:
