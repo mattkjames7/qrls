@@ -4,24 +4,31 @@ from .FakeData import FakeData
 from .QRLeastSq import QRLeastSq
 from .PlotLabel import PlotLabel
 
-
 def _eqlabel(C):
 	
 	deg = len(C) - 1
 	s = '$y='
+	n = 0
 	for i in range(0,deg):
 		s += '{:3.1f}x'.format(C[i])
 		if i < deg-1:
 			s+='^{'+'{:d}'.format(deg-i)+'}'
 		if C[i+1] >= 0:
 			s += '+'
+		n += 1
+		if n == 5:
+			n = 0
+			s += '$\n$'
+
 	s += '{:3.1f}$'.format(C[-1])
+	
 	return s
 		
 
 def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,xy=None,
 			xrange=[-10.0,10.0],n=100,fig=None,maps=[1,1,0,0],
-			ShowNumpy=True,ShowLegend=True,ShowOriginal=True,Label=None):
+			ShowNumpy=True,ShowLegend=True,ShowOriginal=True,
+			ShowFit=True,Label=None):
 	'''
 	Generate some fake "data" by defining a polynomial with some 
 	additional noise.
@@ -62,6 +69,8 @@ def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,xy=None,
 		If True then the plot will have a legend.
 	ShowOriginal : bool
 		If True then the original equation will also be plotted.
+	ShowFit : bool
+		If True then the QR fit will be shown.
 	Label : str
 		plot label
 
@@ -134,7 +143,8 @@ def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,xy=None,
 		ax.plot(xp,yp0,color='black',label=y0l+' (original)')
 		
 	#plot QR fit
-	ax.plot(xp,ypqr,color='red',label=yql+' (QR)',linestyle='--',lw=2.0)
+	if ShowFit:
+		ax.plot(xp,ypqr,color='red',label=yql+' (QR)',linestyle='--',lw=2.0)
 	
 	#plot numpy fit
 	if ShowNumpy:
@@ -146,6 +156,6 @@ def Example(beta=[0.1,0.2,2.0,-10.0],deg=None,noise=5.0,xy=None,
 	
 	#show the legend
 	if ShowLegend:
-		ax.legend()
+		ax.legend(loc='center',fontsize='x-small')
 	
 	return ax,out

@@ -5,3 +5,5 @@ from .GramSchmidt import GramSchmidt
 from .QRLeastSq import QRLeastSq
 from .FakeData import FakeData
 from .Example import Example
+
+from . import Test
