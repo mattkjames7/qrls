@@ -8,16 +8,16 @@ QR decomposition based Least-Squares example code.
 
 This code will require `numpy` and `matplotlib` to be installed in order to work.
 
-Clone this repo, create a wheel file and install using `pip3`:
+Clone this repo, create a wheel file and install using `pip3` or install directly:
 
 ```bash
 #clone me
 git clone https://github.com/mattkjames7/qrls.git
 cd qrls
 
-#create wheel file
+#create wheel file (substitude 0.0.1 for the appropriate version)
 python3 setup.py bdist_wheel
-pip3 install dist/qrls-0.0.1-py3-any.whl --user
+pip3 install dist/qrls-0.0.1-py3-none-any.whl --user
 
 #OR install using setup.py
 python3 setup.py install --user
