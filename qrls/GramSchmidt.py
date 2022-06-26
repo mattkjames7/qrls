@@ -18,7 +18,7 @@ def GramSchmidt(A):
 	
 	'''
 	
-    #get the dimensions of A
+	#get the dimensions of A
 	m,n = A.shape
 	
     #U and E have the same shape
@@ -38,7 +38,7 @@ def GramSchmidt(A):
 	#calculate R
 	R = np.dot(Q.T,A)
 
-	#make it upper-triangular!
+	#make sure it's upper-triangular!
 	R = np.triu(R)
 
 	
